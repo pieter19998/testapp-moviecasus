@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core.Services;
 
 namespace Core.Models
 {
@@ -8,6 +9,9 @@ namespace Core.Models
         private bool _isStudentOrder;
 
         private ICollection<MovieTicket> _tickets;
+
+        public ICollection<MovieTicket> Tickets => _tickets;
+        public void AddTicket(MovieTicket ticket) => _tickets.Add(ticket);
 
         public Order(int orderNr, bool isStudentOrder)
         {
@@ -78,9 +82,15 @@ namespace Core.Models
 
         public void Export(TicketExportFormat exportFormat)
         {
-            // Bases on the string respresentations of the tickets (toString), write
-            // the ticket to a file with naming convention Order_<orderNr>.txt of
-            // Order_<orderNr>.json
+            switch (exportFormat)
+            {
+                case TicketExportFormat.Json:
+                    Exporter.ExportToJson(this);
+                    return;
+                case TicketExportFormat.Plaintext:
+                    Exporter.ExportToText(this);
+                    return;
+            }
         }
     }
 }
