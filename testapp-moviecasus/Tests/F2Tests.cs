@@ -72,5 +72,29 @@ namespace Tests {
             //assert
             Assert.AreEqual(Math.Round(order.CalculatePrice()), (Math.Round(ticket1.GetPrice()*7 * 0.9))); //10% discount assumed
         }
+
+        [TestMethod]
+        public void TenPercentDiscountInWeekendWhenExceedingSixTicketsEdgeCaseScenario() {
+            //arrange
+            var sample1 = new MovieScreening(new Movie("Sjaak wordt geslagen op zijn kaak"), DateTime.Parse("Jan 29, 2021"), 14.0);
+            MovieTicket ticket1 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket2 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket3 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket4 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket5 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket6 = new MovieTicket(sample1, false, 5, 28);
+            Order order = new Order(1, false);
+            //act
+            order.AddSeatReservation(ticket1);
+            order.AddSeatReservation(ticket2);
+            order.AddSeatReservation(ticket3);
+            order.AddSeatReservation(ticket4);
+            order.AddSeatReservation(ticket5);
+            order.AddSeatReservation(ticket6);
+            //assert 
+            Assert.AreEqual(Math.Round(order.CalculatePrice()), (Math.Round(ticket1.GetPrice() * 6 * 0.9))); //10% discount assumed
+            //expected result is that there is already discount, as from 6 tickets upward the discount should already be applied. Issues such as these edge cases are common fault scenarios which is why I included an edge case for it. (Even though it is technically the same test as the one listed above. -Vincent
+
+        }
     }
 }
