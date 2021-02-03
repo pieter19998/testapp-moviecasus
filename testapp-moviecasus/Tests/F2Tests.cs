@@ -33,7 +33,7 @@ namespace Tests {
 
             return collection;
         }
-
+        //test the normal scenario, no discount should be applied in the weekend and full price should be paid when there are less than 6 tickets bought.
         [TestMethod]
         public void FullPriceInWeekend()
         {
