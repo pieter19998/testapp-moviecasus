@@ -39,38 +39,38 @@ namespace Tests {
         {
             //arrange
             //create a movie that is in the weekend
-            var _sample = new MovieScreening(new Movie("Sjaak wordt geslagen op zijn kaak"), DateTime.Parse("Jan 29, 2021"), 14.0);
-            MovieTicket _ticket = new MovieTicket(_sample, false, 5, 28);
-            Order _order = new Order(1, false);
+            var sample = new MovieScreening(new Movie("Sjaak wordt geslagen op zijn kaak"), DateTime.Parse("Jan 29, 2021"), 14.0);
+            MovieTicket ticket = new MovieTicket(sample, false, 5, 28);
+            Order order = new Order(1, false);
             //act
-            _order.AddSeatReservation(_ticket);
+            order.AddSeatReservation(ticket);
             //assert
-            Assert.AreEqual(_order.CalculatePrice(), _ticket.GetPrice()); //assume that the price is equal as it should be full price.
+            Assert.AreEqual(order.CalculatePrice(), ticket.GetPrice()); //assume that the price is equal as it should be full price.
         }
 
         [TestMethod]
         public void TenPercentDiscountInWeekendWhenExceedingSixTickets()
         {
             //arrange
-            var _sample1 = new MovieScreening(new Movie("Sjaak wordt geslagen op zijn kaak"), DateTime.Parse("Jan 29, 2021"), 14.0);
-            MovieTicket _ticket1 = new MovieTicket(_sample1, false, 5, 28);
-            MovieTicket _ticket2 = new MovieTicket(_sample1, false, 5, 28);
-            MovieTicket _ticket3 = new MovieTicket(_sample1, false, 5, 28);
-            MovieTicket _ticket4 = new MovieTicket(_sample1, false, 5, 28);
-            MovieTicket _ticket5 = new MovieTicket(_sample1, false, 5, 28);
-            MovieTicket _ticket6 = new MovieTicket(_sample1, false, 5, 28);
-            MovieTicket _ticket7 = new MovieTicket(_sample1, false, 5, 28);
-            Order _order = new Order(1, false);
+            var sample1 = new MovieScreening(new Movie("Sjaak wordt geslagen op zijn kaak"), DateTime.Parse("Jan 29, 2021"), 14.0);
+            MovieTicket ticket1 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket2 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket3 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket4 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket5 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket6 = new MovieTicket(sample1, false, 5, 28);
+            MovieTicket ticket7 = new MovieTicket(sample1, false, 5, 28);
+            Order order = new Order(1, false);
             //act
-            _order.AddSeatReservation(_ticket1);
-            _order.AddSeatReservation(_ticket2);
-            _order.AddSeatReservation(_ticket3);
-            _order.AddSeatReservation(_ticket4);
-            _order.AddSeatReservation(_ticket5);
-            _order.AddSeatReservation(_ticket6);
-            _order.AddSeatReservation(_ticket7);
+            order.AddSeatReservation(ticket1);
+            order.AddSeatReservation(ticket2);
+            order.AddSeatReservation(ticket3);
+            order.AddSeatReservation(ticket4);
+            order.AddSeatReservation(ticket5);
+            order.AddSeatReservation(ticket6);
+            order.AddSeatReservation(ticket7);
             //assert
-            Assert.AreEqual(Math.Round(_order.CalculatePrice()), (Math.Round(_ticket1.GetPrice()*7 * 0.9))); //10% discount assumed
+            Assert.AreEqual(Math.Round(order.CalculatePrice()), (Math.Round(ticket1.GetPrice()*7 * 0.9))); //10% discount assumed
         }
     }
 }
