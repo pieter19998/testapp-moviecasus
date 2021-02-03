@@ -70,13 +70,16 @@ namespace Core.Models
                     }
                     else
                     {
-                        if (_tickets.Count >= 6)
-                            ticketPrice *= 0.9;
+
                     }
                 }
 
                 sum += ticketPrice;
             }
+
+            if (_tickets.Count >= 6)
+                sum *= 0.9;
+
             return sum;
         }
 
