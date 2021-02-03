@@ -29,7 +29,51 @@ namespace Core.Models
 
         public double CalculatePrice()
         {
-            return 0;
+            double sum = 0.0;
+            uint count = 0;
+            foreach (MovieTicket ticket in _tickets)
+            {
+                ++count;
+                double ticketPrice = ticket.GetPrice();
+                
+                if (ticket.IsPremiumTicket())
+                {
+                    if (_isStudentOrder)
+                    {
+                        ticketPrice += 2;
+                    }
+                    else
+                    {
+                        ticketPrice += 3;
+                    }
+                }
+
+                if (ticket.Screening.DateAndTime.IsWeekDay())
+                {
+                    if (count % 2 == 0)
+                    {
+                        ticketPrice = 0;
+                    }
+                }
+                else
+                {
+                    if (_isStudentOrder)
+                    {
+                        if (count % 2 == 0)
+                        {
+                            ticketPrice = 0;
+                        }
+                    }
+                    else
+                    {
+                        if (_tickets.Count >= 6)
+                            ticketPrice *= 0.9;
+                    }
+                }
+
+                sum += ticketPrice;
+            }
+            return sum;
         }
 
         public void Export(TicketExportFormat exportFormat)

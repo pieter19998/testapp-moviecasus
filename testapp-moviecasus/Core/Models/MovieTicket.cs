@@ -20,6 +20,8 @@
             _seatNr = seatNr;
         }
 
+        public MovieScreening Screening => _movieScreening;
+
         public bool IsPremiumTicket()
         {
             return _isPremiumTicket;

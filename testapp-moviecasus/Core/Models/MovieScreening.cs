@@ -19,6 +19,8 @@ namespace Core.Models
             _pricePerSeat = pricePerSeat;
         }
 
+        public DateTime DateAndTime => _dateAndTime;
+
         public double GetPricePerSeat()
         {
             return _pricePerSeat;
