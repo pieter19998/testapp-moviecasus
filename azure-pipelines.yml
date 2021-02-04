@@ -39,7 +39,7 @@ steps:
     inputs:
       SonarQube: 'testapp-moviecasus'
       scannerMode: 'MSBuild'
-      projectKey: 'e0ef738d43016027275740bfc281ed07fe24a0eb'
+      projectKey: 'testapp-moviecasus'
       projectName: 'testapp-moviecasus'
   
   - task: SonarQubePublish@4
