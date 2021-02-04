@@ -1,18 +1,7 @@
 # ASP.NET Core (.NET Framework)- task: SonarQubeAnalyze@4
-- task: SonarQubePrepare@4
-  inputs:
-    SonarQube: 'testapp-moviecasus'
-    scannerMode: 'MSBuild'
-    projectKey: 'e0ef738d43016027275740bfc281ed07fe24a0eb'
-    projectName: 'testapp-moviecasus'
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-- task: SonarQubePublish@4
-  inputs:
-    pollingTimeoutSec: '300'
-
-- task: SonarQubeAnalyze@4
 
 trigger:
   - main
@@ -45,3 +34,16 @@ steps:
       command: test
       projects: '**/*Tests/*.csproj'
       arguments: '--configuration $(buildConfiguration)'
+
+  - task: SonarQubePrepare@4
+    inputs:
+      SonarQube: 'testapp-moviecasus'
+      scannerMode: 'MSBuild'
+      projectKey: 'e0ef738d43016027275740bfc281ed07fe24a0eb'
+      projectName: 'testapp-moviecasus'
+  
+  - task: SonarQubePublish@4
+    inputs:
+      pollingTimeoutSec: '300'
+
+  - task: SonarQubeAnalyze@4
