@@ -68,10 +68,6 @@ namespace Core.Models
                             ticketPrice = 0;
                         }
                     }
-                    else
-                    {
-
-                    }
                 }
 
                 sum += ticketPrice;
